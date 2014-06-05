@@ -24,9 +24,11 @@ var zero = {
         }
         
         if (!this.running) {
-            this.el.style.webkitAnimation = "zero-run 1s steps(13, end) infinite";
+			this.el.style.webkitAnimation = "zero-run-init 0.8s steps(5, end) 1";
             this.running = true;
-        }
+        } else {
+			this.el.style.webkitAnimation = "zero-run 1s steps(13, end) infinite";
+		}
         
         if (this.transformed) {
             this.el.style.webkitTransform = "";
@@ -44,9 +46,11 @@ var zero = {
         }
         
         if (!this.running) {
-            this.el.style.webkitAnimation = "zero-run 1s steps(13, end) infinite";
+			this.el.style.webkitAnimation = "zero-run-init 0.8s steps(5, end) 1";
             this.running = true;
-        }
+        } else {
+            this.el.style.webkitAnimation = "zero-run 1s steps(13, end) infinite";
+		}
         
         if (!this.transformed) {
             this.el.style.webkitTransform = "rotateY(180deg)";
