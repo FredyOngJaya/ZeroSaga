@@ -15,9 +15,25 @@
 
 #viewport {
     background-image: url("../images/bg.png");
-    background-position: -6700px -3px;
+    background-position: -6670px -3px;
     height: 225px;
-    width: 640px;
+    width: 1000px;
+}
+
+.standstill {
+  -webkit-animation: zero-stand 1s steps(2, end) infinite;
+}
+
+.running {
+  -webkit-animation: zero-run 1s steps(13, end) infinite;
+}
+
+.start-running {
+  -webkit-animation: zero-run-init 0.8s steps(5, end) 1;
+}
+
+.go-left {
+  -webkit-transform: rotateY(180deg); 
 }
 
 #zero {
@@ -39,7 +55,5 @@
     -webkit-animation: 
         zero-run-init 0.8s steps(5, end) 1,
         zero-run 1s steps(8, end) infinite;
-    */
-    
-    -webkit-animation: zero-stand 1s steps(2, end) infinite;
+    */    
 }

@@ -11,27 +11,29 @@ var zero = {
     },
     standStill: function () {
         if (this.running) {
-            this.el.style.webkitAnimation = "zero-stand 1s steps(2, end) infinite";
+            this.el.setAttribute('class', 'standstill');
             this.running = false;
         }
     },
     moveRight: function () {
         var posX   = this.getPosX(),
-            newPos = posX + 3;
+            newPos = posX + 5;
         
-        if (posX > 600) {
+        if (posX > 945) {
             return;
         }
         
         if (!this.running) {
-			this.el.style.webkitAnimation = "zero-run-init 0.8s steps(5, end) 1";
+            this.el.classList.remove('standstill');
+			this.el.classList.add('start-running');
             this.running = true;
         } else {
-			this.el.style.webkitAnimation = "zero-run 1s steps(13, end) infinite";
+            this.el.classList.remove('start-running');
+			this.el.classList.add('running');
 		}
         
         if (this.transformed) {
-            this.el.style.webkitTransform = "";
+            this.el.classList.remove('go-left');
             this.transformed = !this.transformed;
         }
         
@@ -39,21 +41,23 @@ var zero = {
     },
     moveLeft: function () {
         var posX   = this.getPosX(),
-            newPos = posX - 3;
+            newPos = posX - 5;
         
         if (posX < 0) {
             return;
         }
         
         if (!this.running) {
-			this.el.style.webkitAnimation = "zero-run-init 0.8s steps(5, end) 1";
+            this.el.classList.remove('standstill');
+            this.el.classList.add('start-running');
             this.running = true;
         } else {
-            this.el.style.webkitAnimation = "zero-run 1s steps(13, end) infinite";
+            this.el.classList.remove('start-running');
+            this.el.classList.add('running');
 		}
         
         if (!this.transformed) {
-            this.el.style.webkitTransform = "rotateY(180deg)";
+            this.el.classList.add('go-left');
             this.transformed = !this.transformed;
         }
         
@@ -66,9 +70,11 @@ window.addEventListener("keydown", function (e) {
     
     switch (code) {
     case 37:
+    case 65:
         zero.moveLeft();
         break;
     case 39:
+    case 68:
         zero.moveRight();
         break;
     }
