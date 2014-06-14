@@ -1,16 +1,21 @@
 @-webkit-keyframes zero-run-init {
     from { background-position: 0px 0px; }
-    to { background-position: -275px 0px; }
+    to { background-position: -110px 0px; }
 }
 
 @-webkit-keyframes zero-run {
     from { background-position: -110px 0px; }
-    to { background-position: -825px 0px; }
+    to { background-position: -770px 0px; }
 }
 
 @-webkit-keyframes zero-stand {
     from { background-position: 0px -50px; }
-    to { background-position: -105px -50px; }
+    to { background-position: -110px -50px; }
+}
+
+@-webkit-keyframes zero-jump {
+  from { background-position: 0px -100px; }
+  to { background-position: -550px -100px; }
 }
 
 #viewport {
@@ -18,22 +23,6 @@
     background-position: -6670px -3px;
     height: 225px;
     width: 1000px;
-}
-
-.standstill {
-  -webkit-animation: zero-stand 1s steps(2, end) infinite;
-}
-
-.running {
-  -webkit-animation: zero-run 1s steps(13, end) infinite;
-}
-
-.start-running {
-  -webkit-animation: zero-run-init 0.8s steps(5, end) 1;
-}
-
-.go-left {
-  -webkit-transform: rotateY(180deg); 
 }
 
 #zero {
@@ -55,4 +44,22 @@
         zero-run-init 0.8s steps(5, end) 1,
         zero-run 1s steps(8, end) infinite;
     */    
+}
+
+
+.standstill {
+  -webkit-animation: zero-stand 1s steps(2, end) infinite;
+}
+
+.running {
+  -webkit-animation: zero-run-init 0.2s steps(2, end) 1, zero-run 1.2s steps(12, end) infinite;
+}
+
+.go-left {
+  -webkit-transform: rotateY(180deg);
+}
+
+.jump {
+  height: 100px !important;
+  -webkit-animation: zero-jump 1s steps(10, end) 1;
 }

@@ -1,21 +1,34 @@
-var map = Xin.Stage('viewport');
-var zero = Xin.Player('zero');
+var map = Xin.Stage('viewport'),
+    zero = Xin.Player('zero', map),
+    KEYS = [];
 
-window.addEventListener('keydown', function (e) {
-  var code = e.keyCode;
-
-  switch (code) {
-  case 37:
-  case 65:
+var run = function () {
+  if (KEYS[37] || KEYS[65]) {
     zero.moveLeft();
-    break;
-  case 39:
-  case 68:
-    zero.moveRight();
-    break;
   }
+  else if (KEYS[39] || KEYS[68]) {
+    zero.moveRight();
+  }
+
+  if (KEYS[32]) {
+    zero.jump();
+  }
+};
+
+var animate = function () {
+  requestAnimationFrame(animate);
+  run();
+};
+
+addEventListener('keydown', function (evt) {
+  KEYS[evt.keyCode] = true;
+//  console.time('keypress');
 });
 
-window.addEventListener('keyup', function () {
+addEventListener('keyup', function (evt) {
+  KEYS[evt.keyCode] = false;
   zero.standStill();
+//  console.timeEnd('keypress');
 });
+
+animate();
