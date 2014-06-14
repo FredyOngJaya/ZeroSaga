@@ -1,17 +1,30 @@
 var Xin = {};
 
-Xin.Stage = function (id) {
-  var _elem = document.getElementById(id),
+Xin.Stage = function (map_id) {
+  var _elem = document.getElementById(map_id),
       _style = getComputedStyle(_elem),
       _width = parseInt(_style.width, 10),
-      _height = parseInt(_style.height, 10);
-  
+      _height = parseInt(_style.height, 10),
+      _pos = 0;
+
   return {
     getWidth: function () {
-      return _width; 
+      return _width;
     },
     getHeight: function () {
       return _height;
+    },
+    move: function (speed) {
+      _pos += speed;
+
+      if (_pos > _width) {
+        _pos = 0;
+      }
+      else if (_pos < 0) {
+        _pos = _width;
+      }
+
+      _elem.style.backgroundPositionX = _pos + 'px';
     }
   };
 };
@@ -27,6 +40,8 @@ Xin.Player = function (id, map) {
       _speed = 5,
       _power,
       _motion,
+      _normalcap = _posY,
+      _jumpcap = _posY - 100,
       _transformed = false,
       _running = false,
       _jumping = false;
@@ -54,12 +69,7 @@ Xin.Player = function (id, map) {
           _transformed = !_transformed;
         }
 
-        if (_posX >= map.getWidth() - _width) {
-          return;
-        }
-
-        _posX += _speed;
-        _elem.style.left = _posX + 'px';
+        map.move(-_speed);
       },
       _moveLeft = function () {
 //        console.log('move left');
@@ -75,12 +85,7 @@ Xin.Player = function (id, map) {
           _transformed = !_transformed;
         }
 
-        if (_posX <= 0) {
-          return;
-        }
-
-        _posX -= _speed;
-        _elem.style.left = _posX + 'px';
+        map.move(_speed);
       },
       _jump = function () {
 //        console.log('jump to %d', _posY);
@@ -89,8 +94,8 @@ Xin.Player = function (id, map) {
 //          console.log('set jump');
           _jumping = true;
           _class.add('jump');
-          _power = -2;
-//          console.time('jump');
+          _power = -5;
+          console.time('jump');
           _moveTop();
         }
       },
@@ -101,14 +106,14 @@ Xin.Player = function (id, map) {
 
         _posY += _power;
         _elem.style.top = _posY + 'px';
-        if (_posY <= 100) {
+        if (_posY <= _jumpcap) {
           _power *= -1;
         }
 
-        if (_posY > 145) {
+        if (_posY > _normalcap) {
           _jumping = false;
           _class.remove('jump');
-//          console.timeEnd('jump');
+          console.timeEnd('jump');
           cancelAnimationFrame(_motion);
         }
 

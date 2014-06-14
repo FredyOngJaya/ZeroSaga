@@ -1,4 +1,5 @@
 var map = Xin.Stage('viewport'),
+    fog = Xin.Stage('fog'),
     zero = Xin.Player('zero', map),
     KEYS = [];
 
@@ -13,6 +14,8 @@ var run = function () {
   if (KEYS[32]) {
     zero.jump();
   }
+
+  fog.move(1);
 };
 
 var animate = function () {

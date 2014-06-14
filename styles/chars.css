@@ -18,32 +18,54 @@
   to { background-position: -550px -100px; }
 }
 
+@-webkit-keyframes fog-fade {
+  0% { opacity: 0; }
+  20 { opacity: 0.3; }
+  40% { opacity: 1.0; }
+  60% { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+body {
+  background: black;
+}
+
 #viewport {
-    background-image: url("../images/bg.png");
-    background-position: -6670px -3px;
-    height: 225px;
-    width: 1000px;
+  background-image: url("../images/bg.png");
+  width: 1000px;
+  height: 224px;
+
+  margin: 0 auto;
+  position: relative;
+}
+
+#fog {
+  background-image: url("../images/fog.png");
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  -webkit-animation: fog-fade 5s linear infinite;
 }
 
 #zero {
     background-image: url("../images/zero.png");
-    
     width: 55px;
     height: 50px;
-    
-    position: relative;
-    left: 100px;
+
+    position: absolute;
+    left: 475px;
     top: 145px;
-    
+
     /*
     background-position: -815px -660px;
     */
-    
+
     /*
-    -webkit-animation: 
+    -webkit-animation:
         zero-run-init 0.8s steps(5, end) 1,
         zero-run 1s steps(8, end) infinite;
-    */    
+    */
 }
 
 
@@ -61,5 +83,5 @@
 
 .jump {
   height: 100px !important;
-  -webkit-animation: zero-jump 1s steps(10, end) 1;
+  -webkit-animation: zero-jump 0.8s steps(10, end) 1;
 }
