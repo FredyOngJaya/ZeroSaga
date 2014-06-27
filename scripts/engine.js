@@ -44,7 +44,8 @@ Xin.Player = function (id, map) {
       _jumpcap = _posY - 100,
       _transformed = false,
       _running = false,
-      _jumping = false;
+      _jumping = false,
+      _angle = 0;
 
   var _standStill = function () {
 //        console.log('stand still');
@@ -103,20 +104,20 @@ Xin.Player = function (id, map) {
         _motion = requestAnimationFrame(_moveTop);
 
 //        console.log('jumping');
-
-        _posY += _power;
+        
+        _angle += 6;
+        _posY = _normalcap - (Math.sin(Math.PI * _angle / 180) * 100);
+        
         _elem.style.top = _posY + 'px';
-        if (_posY <= _jumpcap) {
-          _power *= -1;
+        
+        if (_angle >= 180) {
+            _angle = 0;
+            _jumping = false;
+            _posY = _normalcap;
+            _class.remove('jump');
+//            console.timeEnd('jump');
+            cancelAnimationFrame(_motion);
         }
-
-        if (_posY > _normalcap) {
-          _jumping = false;
-          _class.remove('jump');
-          console.timeEnd('jump');
-          cancelAnimationFrame(_motion);
-        }
-
       };
 
   return {
