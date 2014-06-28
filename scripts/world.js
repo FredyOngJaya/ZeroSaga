@@ -6,20 +6,36 @@ var map = Xin.Stage('viewport'),
     fog = Xin.Stage('fog'),
     zero = Xin.Player('zero', map),
     keys_ = [],
-    world;
+    world,
+    riding = false,
+    direction = 1;
 
 var run = function () {
-  if (keys_[37] || keys_[65]) {
+  if (keys_[Key.LEFT] || keys_[Key.A]) {
     zero.moveLeft();
-  } else if (keys_[39] || keys_[68]) {
+    direction = -1;
+  } else if (keys_[Key.RIGHT] || keys_[Key.D]) {
     zero.moveRight();
+    direction = 1;
   }
 
-  if (keys_[32]) {
+  if (keys_[Key.DOWN] || keys_[Key.S]) {
+    riding = true;
+  } else if (keys_[Key.UP] || keys_[Key.W]) {
+    riding = false;
+    zero.unride();
+  }
+
+  if (keys_[Key.SPACE]) {
     zero.jump();
   }
 
-  fog.move(1);
+  if (riding) {
+    zero.ride();
+    fog.move(10 * direction);
+  } else {
+    fog.move(1 * direction);
+  }
 };
 
 Main.startAnimate = function () {

@@ -18,6 +18,11 @@
   to { background-position: -385px -100px; }
 }
 
+@-webkit-keyframes zero-ride {
+  from { background-position: 0px -200px; }
+  to { background-position: -550px -200px; }
+}
+
 @-webkit-keyframes fog-fade {
   0% { opacity: 0; }
   20 { opacity: 0.3; }
@@ -68,7 +73,6 @@ body {
     */
 }
 
-
 .standstill {
   -webkit-animation: zero-stand 1s steps(2, end) infinite;
 }
@@ -84,4 +88,9 @@ body {
 .jump {
   height: 100px !important;
   -webkit-animation: zero-jump 0.8s steps(7, end) 1;
+}
+
+.riding {
+  width: 100px !important;
+  -webkit-animation: zero-ride 1s steps(5, end) infinite;
 }
