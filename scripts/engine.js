@@ -1,4 +1,6 @@
-var Xin = {};
+var Xin = Xin || {};
+
+(function (Xin) {
 
 Xin.Stage = function (map_id) {
   var _elem = document.getElementById(map_id),
@@ -104,12 +106,12 @@ Xin.Player = function (id, map) {
         _motion = requestAnimationFrame(_moveTop);
 
 //        console.log('jumping');
-        
+
         _angle += 6;
         _posY = _normalcap - (Math.sin(Math.PI * _angle / 180) * 100);
-        
+
         _elem.style.top = _posY + 'px';
-        
+
         if (_angle >= 180) {
             _angle = 0;
             _jumping = false;
@@ -127,3 +129,5 @@ Xin.Player = function (id, map) {
     jump: _jump
   };
 };
+
+})(Xin);

@@ -1,37 +1,45 @@
+var Main = Main || {};
+
+(function (Main) {
+
 var map = Xin.Stage('viewport'),
     fog = Xin.Stage('fog'),
     zero = Xin.Player('zero', map),
-    KEYS = [];
+    keys_ = [],
+    world;
 
 var run = function () {
-  if (KEYS[37] || KEYS[65]) {
+  if (keys_[37] || keys_[65]) {
     zero.moveLeft();
-  }
-  else if (KEYS[39] || KEYS[68]) {
+  } else if (keys_[39] || keys_[68]) {
     zero.moveRight();
   }
 
-  if (KEYS[32]) {
+  if (keys_[32]) {
     zero.jump();
   }
 
   fog.move(1);
 };
 
-var animate = function () {
-  requestAnimationFrame(animate);
+Main.startAnimate = function () {
+  world = requestAnimationFrame(Main.startAnimate);
   run();
 };
 
+Main.stopAnimate = function () {
+  cancelAnimationFrame(world);
+};
+
 addEventListener('keydown', function (evt) {
-  KEYS[evt.keyCode] = true;
-//  console.time('keypress');
+  keys_[evt.keyCode] = true;
 });
 
 addEventListener('keyup', function (evt) {
-  KEYS[evt.keyCode] = false;
+  keys_[evt.keyCode] = false;
   zero.standStill();
-//  console.timeEnd('keypress');
 });
 
-animate();
+})(Main);
+
+Main.startAnimate();
