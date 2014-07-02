@@ -8,15 +8,15 @@ var map = Xin.Stage('viewport'),
     keys_ = [],
     world,
     riding = false,
-    direction = 1;
+    direction = -1;
 
 var run = function () {
   if (keys_[Key.LEFT] || keys_[Key.A]) {
     zero.moveLeft();
-    direction = -1;
+    direction = 1;
   } else if (keys_[Key.RIGHT] || keys_[Key.D]) {
     zero.moveRight();
-    direction = 1;
+    direction = -1;
   }
 
   if (keys_[Key.DOWN] || keys_[Key.S]) {

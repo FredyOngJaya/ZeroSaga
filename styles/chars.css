@@ -15,7 +15,7 @@
 
 @-webkit-keyframes zero-jump {
   from { background-position: 0px -100px; }
-  to { background-position: -385px -100px; }
+  to { background-position: -550px -100px; }
 }
 
 @-webkit-keyframes zero-ride {
@@ -87,7 +87,7 @@ body {
 
 .jump {
   height: 100px !important;
-  -webkit-animation: zero-jump 0.8s steps(7, end) 1;
+  -webkit-animation: zero-jump 1.0s steps(10, end) 1;
 }
 
 .riding {

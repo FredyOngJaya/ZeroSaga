@@ -109,7 +109,7 @@ Xin.Player = function (id, map) {
           _jumping = true;
           _class.add('jump');
           _power = -5;
-          console.time('jump');
+//          console.time('jump');
           _moveTop();
         }
       },
@@ -118,6 +118,11 @@ Xin.Player = function (id, map) {
         if (!_riding) {
           _riding = true;
           _class.add('riding');
+        }
+        if (_transformed) {
+            _rideSpeed = -10;
+        } else {
+            _rideSpeed = 10;
         }
         map.move(-_rideSpeed);
       },
@@ -133,20 +138,20 @@ Xin.Player = function (id, map) {
       _moveTop = function () {
         _motion = requestAnimationFrame(_moveTop);
 
-//        console.log('jumping');
-
-        _angle += 6;
-        _posY = _normalcap - (Math.sin(Math.PI * _angle / 180) * 100);
-
-        _elem.style.top = _posY + 'px';
-
-        if (_angle >= 180) {
+        if (_angle >= 171) {
+            cancelAnimationFrame(_motion);
             _angle = 0;
             _jumping = false;
             _posY = _normalcap;
+            _elem.style.top = _posY + 'px';
             _class.remove('jump');
 //            console.timeEnd('jump');
-            cancelAnimationFrame(_motion);
+        } else {
+//            console.log('jumping');
+            _angle += 3;
+            _posY = Math.round(_normalcap - (Math.sin(Math.PI * _angle / 180) * 100));
+
+            _elem.style.top = _posY + 'px';
         }
       };
 
